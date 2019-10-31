@@ -85,8 +85,29 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Why this project took more time then it should have ',
+    date: 'Jan 1st, 2999',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
+
+const article = document.querySelectorAll('.articles');
+
+function createData(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
@@ -112,3 +133,59 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+// Define New Elements
+
+const article =  document.createElement('div');
+const articleTitle = document.createElement('h2');
+articleTitle.textContent = title;
+
+const articleDate = document.createElement('p');
+articleDate.textContent = date;
+
+const content1 = document.createElement('p');
+content1.textContent = firstParagraph;
+
+const content2 = document.createElement('p');
+content2.textContent = secondParagraph;
+
+const content3 = document.createElement('p');
+content3.textContent = thirdParagraph;
+
+const exnBtn = document.createElement('span');
+exnBtn.textContent = 'Read More';
+exnBtn.classList.add('expandButton');
+// Event Listener
+
+exnBtn.addEventListener('click', () => {
+  articleTitle.classList.toggle('article-open');
+
+})
+//structure
+
+article.appendChild(articleTitle);
+articleTitle.appendChild(articleDate);
+articleTitle.appendChild(content1);
+articleTitle.appendChild(content2);
+articleTitle.appendChild(content3);
+articleTitle.appendChild(exnBtn);
+
+//Class Names
+  articleTitle.classList.add('article');
+  articleDate.classList.add('date');
+  exnBtn.classList.add('expandButton');
+
+  return article;
+}
+
+const newData = data.map((web) => 
+createData(
+  web.title,
+  web.date,
+  web.firstParagraph,
+  web.secondParagraph,
+  web.thirdParagraph,
+),
+);
+newData.forEach((newWeb) => 
+  document.querySelector('.articles').appendChild(newWeb),
+);
